@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Portaria</title>
+    <style>
+        /* ===== Minimalist Portaria CSS ===== */
+:root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #7a7a7a;
+    --success: #28a745;
+    --danger: #dc3545;
+    --accent: #0d6efd;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 10px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    text-align: center;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+}
+
+#relógio {
+    font-size: 36px;
+    font-weight: 700;
+    padding: 15px 25px;
+    border-radius: var(--radius);
+    background-color: var(--card);
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-align: left;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    max-width: 420px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 6px rgba(13,110,253,0.2);
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #0b5ed7;
+    box-shadow: 0 4px 12px rgba(13,110,253,0.2);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(13,110,253,0.2);
+}
+
+p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+#resultado {
+    margin-top: 20px;
+    padding: 15px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+#resultado.success {
+    background-color: rgba(40,167,69,0.1);
+    color: var(--success);
+}
+
+#resultado.danger {
+    background-color: rgba(220,53,69,0.1);
+    color: var(--danger);
+}
+
+/* Estilo minimalista para inputs lado a lado (hora simulada + botão) */
+#horaSimulada {
+    width: 90px;
+    margin-right: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    #relógio {
+        font-size: 28px;
+        padding: 12px 20px;
+    }
+
+    input[type="text"], input[type="number"] {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    label {
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h1>Sistema de Portaria</h1>
+    <div id="relógio">00:00</div>
+    
+    <label for="horaSimulada">Alterar hora para teste:</label>
+    <input type="number" id="horaSimulada" min="0" max="23" placeholder="HH">
+    <button onclick="atualizarRelogio()">Atualizar Hora</button>
+
+    <p>Digite seu nome para entrar (apenas permitidos antes das 22h)</p>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <button onclick="verificarEntrada()">Entrar</button>
+    <p id="resultado"></p>
+
+    <script>
+        const usuariosPermitidos = ["Felipe", "Ana", "João", "Maria" , "Lucas", "Sofia", "Gustavo", "Paolão"];
+
+        let horaAtual = new Date().getHours();
+        const relogio = document.getElementById('relógio');
+
+        function mostrarRelogio() {
+            let horas = horaAtual.toString().padStart(2, '0');
+            let minutos = new Date().getMinutes().toString().padStart(2, '0');
+            relogio.textContent = `${horas}:${minutos}`;
+        }
+
+        function atualizarRelogio() {
+            const novaHora = parseInt(document.getElementById('horaSimulada').value);
+            if (!isNaN(novaHora) && novaHora >= 0 && novaHora <= 23) {
+                horaAtual = novaHora;
+                mostrarRelogio();
+            } else {
+                alert("Digite um valor de hora válido (0 a 23)");
+            }
+        }
+
+        function verificarEntrada() {
+            const nome = document.getElementById('nome').value;
+            const resultado = document.getElementById('resultado');
+
+            if (!usuariosPermitidos.includes(nome)) {
+                resultado.textContent = `Desculpe, ${nome}. Você não está autorizado.`;
+                resultado.style.color = 'red';
+                return;
+            }
+
+            if (horaAtual < 22) {
+                resultado.textContent = `Bem-vindo, ${nome}! Você pode entrar.`;
+                resultado.style.color = 'green';
+            } else {
+                resultado.textContent = `Desculpe, ${nome}. O horário de entrada é permitido apenas antes das 22 horas.`;
+                resultado.style.color = 'red';
+            }
+        }
+
+        setInterval(() => {
+            if (!document.getElementById('horaSimulada').value) {
+                horaAtual = new Date().getHours();
+            }
+            mostrarRelogio();
+        }, 1000);
+
+        mostrarRelogio();
+    </script>
+</body>
+</html>

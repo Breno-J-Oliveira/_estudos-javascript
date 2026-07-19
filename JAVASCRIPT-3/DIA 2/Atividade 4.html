@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Personagens RPG</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            border-radius: 8px;
+            display: inline-block;
+            padding: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Gerador de Personagens de RPG</h3>
+
+    <button onclick="gerarPersonagem()">Gerar Personagem</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function gerarPersonagem() {
+
+            var nome = prompt("Digite o nome do personagem:");
+            var classe = prompt("Digite a classe (ex: Guerreiro, Mago, Arqueiro):");
+            var habilidade = prompt("Digite a principal habilidade:");
+
+            if (nome === "" || classe === "" || habilidade === "" || 
+                nome === null || classe === null || habilidade === null) {
+
+                document.getElementById("resultado").innerHTML = 
+                "Você precisa preencher todas as informações!";
+                return;
+            }
+
+            var frase = "O lendário " + classe + " chamado " + nome + 
+            " acaba de entrar na guilda usando sua técnica de " + habilidade + "!";
+
+            document.getElementById("resultado").innerHTML = frase;
+        }
+    </script>
+
+</body>
+</html>

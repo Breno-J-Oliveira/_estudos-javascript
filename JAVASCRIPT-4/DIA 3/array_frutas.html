@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Array em javascript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #ffffff;
+            border-radius: 12px;
+            display: block;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #007BFF, #00c6ff);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+}
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exemplo de Array em JavaScript</h1>
+
+    <button onclick="mostrarFrutas()">Mostrar Frutas</button>
+
+    <button onclick="adicionarfruta()">Adicionar Fruta</button>
+
+    <button onclick="removerultima()">Remover Última Fruta</button>
+    
+    <script>
+        let frutas = ["Maçã", "Banana", "Laranja"];
+
+        function mostrarFrutas() {
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (frutas.length === 0) {
+                resultadoDiv.innerHTML = "Nenhuma fruta na lista.";
+                
+            }
+            else {
+                resultadoDiv.innerHTML = "Frutas na lista: <br>" + frutas.join("<br>");
+            }
+        }
+        function adicionarfruta() {
+            let novaFruta = prompt("Digite o nome da fruta que deseja adicionar:");
+            if (novaFruta) {
+                frutas.push(novaFruta);
+                mostrarFrutas();
+            }
+        }
+        function removerultima() {
+            if (frutas.length > 0) {
+                frutas.pop();
+                mostrarFrutas();
+            } else {
+                document.getElementById("resultado").innerHTML = "Nenhuma fruta para remover.";
+            }
+        }
+
+        mostrarFrutas();
+    </script>
+    
+    <div id="resultado"></div>
+</body>
+</html>

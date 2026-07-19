@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 2</title>
+</head>
+<body>
+
+    <h2>Clique para criar uma lista</h2>
+
+    <button onclick="criarLista()">Criar Lista</button>
+    <ul id="minhaLista"></ul>
+    <script>
+        function criarLista() {
+            const lista = document.getElementById('minhaLista');
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 1; i <= 5; i++) {
+                const item = document.createElement('li');
+                item.textContent = `Item ${i}`;
+                fragment.appendChild(item);
+            }
+
+            lista.appendChild(fragment);
+        }
+    </script>
+</body>
+</html>

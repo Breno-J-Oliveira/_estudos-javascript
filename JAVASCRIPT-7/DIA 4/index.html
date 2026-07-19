@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Operadores Javascript - SENAI</title>
+    <style>
+/* ===== Painel de Operadores - CSS Moderno ===== */
+:root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --primary: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --text: #1a1a1a;
+    --muted: #555;
+    --radius: 10px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-light: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    background-color: var(--card);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    width: 100%;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+input[type="number"] {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    transition: 0.2s all ease;
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(13,110,253,0.2);
+}
+
+button {
+    padding: 12px 25px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(13,110,253,0.2);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+.grid-resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+p strong {
+    color: var(--text);
+}
+
+.destaque {
+    color: var(--primary);
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .input-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Painel de Operadores Javascript - SENAI</h2>
+        <p>Insira dois números para processar os operações do material</p>
+        <div class="input-group">
+            <input type="number" id="input1" placeholder="Digite o primeiro valor(ex:10)">
+            <input type="number" id="input2" placeholder="Digite o segundo valor(ex:5)">
+        </div>
+        
+        <button onclick="processarOperacoes()">Processar Operações</button>
+        <div class="grid-resultados" id="painel"></div>
+    </div>
+
+    <script>
+        function processarOperacoes() {
+            let a = Number(document.getElementById('input1').value);
+            let b = Number(document.getElementById('input2').value);
+            let painel = document.getElementById('painel');
+
+            if (isNaN(a) || isNaN(b)) {
+                painel.innerHTML = '<p class="destaque">Por favor, insira valores válidos para ambos os campos.</p>';
+                return;
+            }
+
+            let conteudo = '';
+
+            conteudo += '<section>' +
+                            '<h4>A. Aritméticos</h4>' +
+                            '<p><strong>Adição:</strong> ' + (a + b) + '</p>' +
+                            '<p><strong>Subtração:</strong> ' + (a - b) + '</p>' +
+                            '<p><strong>Multiplicação:</strong> ' + (a * b) + '</p>' +
+                            '<p><strong>Divisão:</strong> ' + (b !== 0 ? (a / b) : 'Divisão por zero não é permitida') + '</p>' +
+                            '<p><strong>Resto (%):</strong> ' + (b !== 0 ? (a % b) : 'Módulo por zero não é permitido') + '</p>' +
+                            '<p><strong>Exponenciação (**):</strong> ' + (a ** b) + '</p>' +
+                        '</section>';
+
+            conteudo += '<section>' +
+                            '<h4>B. Atribuição</h4>' +
+                            '<p><strong>Simples (=):</strong> ' + a + '</p>' +
+                            '<p><strong>Soma (+=):</strong> ' + (a + b) + '</p>' +
+                            '<p><strong>Multiplicação (*=):</strong> ' + (a * b) + '</p>' +
+                        '</section>';
+
+            conteudo += '<section>' +
+                            '<h4>C. Comparação</h4>' +
+                            '<p><strong>Igualdade:</strong> ' + (a == b) + '</p>' +
+                            '<p><strong>Idêntico:</strong> ' + (a === b) + '</p>' +
+                            '<p><strong>Diferente:</strong> ' + (a !== b) + '</p>' +
+                            '<p><strong>Maior que:</strong> ' + (a > b) + '</p>' +
+                            '<p><strong>Menor ou igual:</strong> ' + (a <= b) + '</p>' +
+                        '</section>';
+
+            conteudo += '<section>' +
+                            '<h4>D. Lógicos</h4>' +
+                            '<p><strong>AND (&&):</strong> ' + ((a > 0) && (b > 0)) + '</p>' +
+                            '<p><strong>OR (||):</strong> ' + ((a > 0) || (b > 0)) + '</p>' +
+                            '<p><strong>NOT (!):</strong> ' + (!(a > 0)) + '</p>' +
+                        '</section>';
+
+            conteudo += '<section>' +
+                            '<h4>E. Incremento/Decremento</h4>' +
+                            '<p><strong>Incremento (++a):</strong> ' + (++a) + '</p>' +
+                            '<p><strong>Decremento (--b):</strong> ' + (--b) + '</p>' +
+                        '</section>';
+
+            conteudo += '<section>' +
+                            '<h4>F. Ternário</h4>' +
+                            '<p><strong>Igualdade:</strong> ' + (a === b ? 'a é igual a b' : 'a não é igual a b') + '</p>' +
+                            '<p><strong>A > B:</strong> ' + (a > b ? 'a é maior que b' : 'a não é maior que b') + '</p>' +
+                        '</section>';
+
+            painel.innerHTML = conteudo;
+        }
+    </script>
+</body>
+</html>

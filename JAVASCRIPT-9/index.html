@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Tabuadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            width: 40%;
+            display: flex;
+            flex-direction:row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>PAINEL DE TABUADAS</h1>
+
+    <button onclick="geradorTabuada()">Clique aqui para gerar sua tabuada</button>
+
+    <div class="card"> 
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+    function geradorTabuada() {
+        const resultadoDiv = document.getElementById('resultado');
+        resultadoDiv.innerHTML = ''; 
+
+        for (let i = 1; i <= 10; i++) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            let tabuadaTexto = `<h3>Tabuada do ${i}</h3><ul>`;
+            for (let j = 1; j <= 10; j++) {
+                tabuadaTexto += `<li>${i} x ${j} = ${i * j}</li>`;
+            }
+            tabuadaTexto += '</ul>';
+            card.innerHTML = tabuadaTexto;
+            resultadoDiv.appendChild(card);
+        }
+    }
+    </script>
+
+
+</body>
+</html>

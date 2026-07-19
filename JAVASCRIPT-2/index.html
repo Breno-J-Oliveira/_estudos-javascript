@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquina de suco</title>
+</head>
+<body>
+
+    <h2>Monte seu suco</h2>
+
+    <h3>Você pode escolher entre 1 a 3 frutas</h3>
+
+    <select id="frutas" multiple size="3" style="width:300px;">
+        <option value="1">Banana</option>
+        <option value="2">Morango</option>
+        <option value="3">Manga</option>
+        <option value="4">Abacaxi</option>
+        <option value="5">Laranja</option>
+        <option value="6">Maçã</option>
+    </select>
+
+    <br>
+
+    <h3>(Use ctrl para selecionar várias frutas)</h3>
+
+    <br><br>
+    
+    <button type="button" onclick="selecionarTodas()">Selecionar Todas</button>
+
+    <br><br>
+
+    <label>Água ou Leite</label>
+    <br>
+    <input type="radio" name="liquido" value="Agua">Água
+    <input type="radio" name="liquido" value="Leite">Leite
+
+    <br><br>
+
+    <label>Açúcar</label>
+    <br>
+    <input type="radio" name="acucar" value="Sim">Sim
+    <input type="radio" name="acucar" value="Nao">Não
+
+    <br><br>
+
+    <button type="button" onclick="fazerSuco()">Fazer Suco</button>
+    <button type="button" onclick="limparSelecao()">Limpar Seleção</button>
+
+    <script>
+        function selecionarTodas(){
+            var frutas = document.getElementById("frutas");
+
+            for(var i = 0; i < frutas.options.length; i++){
+                frutas.options[i].selected = true;
+            }
+        }
+
+        function fazerSuco(){
+            var frutas = document.getElementById("frutas");
+            var frutasSelecionadas = [];
+
+            for(var i = 0; i < frutas.options.length; i++){
+                if(frutas.options[i].selected){
+                    frutasSelecionadas.push(frutas.options[i].text);
+                }
+            }
+
+            if(frutasSelecionadas.length == 0){
+                alert("Selecione pelo menos 1 fruta.");
+                return;
+            }
+
+            if(frutasSelecionadas.length > 3){
+                alert("Você pode escolher no máximo 3 frutas.");
+                return;
+            }
+
+            var liquido = document.querySelector('input[name="liquido"]:checked');
+            var acucar = document.querySelector('input[name="acucar"]:checked');
+
+            if(!liquido){
+                alert("Escolha Água ou Leite.");
+                return;
+            }
+
+            if(!acucar){
+                alert("Escolha se deseja açúcar.");
+                return;
+            }
+
+            alert(
+                "Suco feito com: " + frutasSelecionadas.join(", ") +
+                "\nLíquido: " + liquido.value +
+                "\nAçúcar: " + acucar.value
+            );
+        }
+
+        function limparSelecao(){
+            var frutas = document.getElementById("frutas");
+
+            for(var i = 0; i < frutas.options.length; i++){
+                frutas.options[i].selected = false;
+            }
+
+            var radios = document.querySelectorAll('input[type="radio"]');
+            for(var i = 0; i < radios.length; i++){
+                radios[i].checked = false;
+            }
+        }
+    </script>
+    
+</body>
+</html>

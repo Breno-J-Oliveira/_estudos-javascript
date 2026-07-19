@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Automático de Multiplicação com WHILE</title>
+</head>
+<style>
+    body {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    input{
+        padding: 10px;
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #resultado {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00000010;
+        border: 1.5px solid #000000;
+    }
+
+    .card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;    
+    }
+
+    p {
+        font-size: 16px;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+        color: #007BFF;
+        margin-bottom: 15px;
+    }
+</style>
+<body>
+
+    <header>
+        <h1>PAINEL DE TABUADAS</h1>
+    </header>
+    
+    <main>
+        <label>Gerar o painel da tabuada de 1 até a tabuada de?</label>
+        <input type="number" id="numero" placeholder="Digite um número">
+
+        <br>
+
+        <button onclick="geradorTabuada()">Gerar Painel Tabuada</button>
+
+        <br>
+
+        <div id="resultado">
+            <h2>GERE SUA TABUADA</h2>
+        </div>
+
+        <script>
+            function geradorTabuada() {
+                let conteudo = "";
+                let i = 1;
+                let numero = parseInt(document.getElementById('numero').value);
+
+
+                if (isNaN(numero) || numero < 1) {
+                    alert('Insira um valor maior que 1 para gerar a tabuada.');
+                    return;
+                }
+
+                while (numero > 0) {
+                    conteudo += `<h2>Tabuada do ${numero}</h2>`;
+                    let i = 1;
+                    while (i <= 10) {
+                        conteudo += `<p>${numero} x ${i} = ${numero * i}</p>`;
+                        i++;
+                    }
+                    i = 1;
+                    numero--;
+                    conteudo += `<hr>`;
+                }
+                document.getElementById('resultado').innerHTML = conteudo;
+                }
+        </script>
+    </main>
+
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>somatoria</title>
+</head>
+<body>
+
+    <h3>Somatoria de dois números inteiros</h3>
+    
+    <script language="javascript">
+        // Objetivo: Somar dois números inteiros e apresentar o resultado para o usuario
+        //definir uma variavel com o prefixo jis
+        //elemento de entrada : metodo prompt objeto windows
+        // elemento de saida: metodo white do objeto document
+
+        //definir as variaveis
+        var jisNum1;
+        var jisNum2;
+        var jisSoma;
+
+        //entrada dos dados
+        jisNum1 = prompt("Digite o primeiro numero inteiro: ");
+        jisNum2 = prompt("Digite o segundo numero inteiro: ");
+
+        //processamento dos dados
+        jisSoma = parseInt(jisNum1) + parseInt(jisNum2);
+
+        //saida dos dados
+        document.write("A soma dos numeros " + jisNum1 + " e " + jisNum2 + " é igual a " + jisSoma);
+
+    </script>
+</body>
+</html>

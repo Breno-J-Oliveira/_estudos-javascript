@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 3</title>
+</head>
+<body>
+
+    <h2>Atividade 3</h2>
+
+    <button id="mostrarNomes">Mostrar Nomes</button>
+    <ul id="listaNomes"></ul>
+
+    <script>
+        const nomes = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
+
+        document.getElementById('mostrarNomes').addEventListener('click', function() {
+            const lista = document.getElementById('listaNomes');
+            const fragment = document.createDocumentFragment();
+            nomes.forEach(function(nome) {
+                const item = document.createElement('li');
+                item.textContent = nome;
+                fragment.appendChild(item);
+            });
+            lista.appendChild(fragment);
+        });
+    </script>
+    
+</body>
+</html>

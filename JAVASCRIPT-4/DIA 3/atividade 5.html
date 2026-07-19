@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Digital</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            border-radius: 8px;
+            display: inline-block;
+            padding: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Meu Amigo Digital 🤖</h3>
+
+    <button onclick="alimentar()">Alimentar</button>
+    <button onclick="brincar()">Brincar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+
+        var mascote = {
+            nome: "Bits",
+            emoji: "🤖",
+            fome: 50,
+            felicidade: 50
+        };
+
+        function atualizarStatus() {
+
+            var humor = "";
+
+            if (mascote.fome >= 80 && mascote.felicidade >= 80) {
+                mascote.emoji = "🌟";
+                humor = "Está SUPER feliz!";
+            }
+            else if (mascote.fome <= 20) {
+                mascote.emoji = "🪫";
+                humor = "Está com pouca energia!";
+            }
+            else {
+                mascote.emoji = "🤖";
+                humor = "Está normal.";
+            }
+
+            document.getElementById("resultado").innerHTML =
+                mascote.emoji + "<br><br>" +
+                "Nome: " + mascote.nome + "<br>" +
+                "Energia: " + mascote.fome + "<br>" +
+                "Felicidade: " + mascote.felicidade + "<br><br>" +
+                humor;
+        }
+
+        function alimentar() {
+            mascote.fome += 10;
+
+            if (mascote.fome > 100) {
+                mascote.fome = 100;
+            }
+
+            atualizarStatus();
+        }
+
+        function brincar() {
+            mascote.felicidade += 10;
+            mascote.fome -= 5;
+
+            if (mascote.fome < 0) {
+                mascote.fome = 0;
+            }
+
+            if (mascote.felicidade > 100) {
+                mascote.felicidade = 100;
+            }
+
+            atualizarStatus();
+        }
+
+        atualizarStatus();
+
+    </script>
+
+</body>
+</html>
